@@ -3,6 +3,7 @@ BANG-COMPUTE   =  $(shell expr match `hostname` compute)
 BANG-BANG = $(shell echo $(BANG)\&$(BANG-COMPUTE))
 STAMPEDE = $(shell hostname | grep stampede | wc -c)
 COMET = $(shell hostname | grep comet | wc -c)
+SORKEN = $(shell hostname | grep sorken | wc -c)
 
 # If you want to compile with MPI enabled,
 # uncomment this line
@@ -35,9 +36,10 @@ ifneq ($(COMET), 0)
 else
 endif
 
-ifneq ($(EXPANSE), 0)
- REPORT = -fopt-info-vec-omp
+ifneq ($(SORKEN), 0)
 else
+ # assume EXPANSE
+ REPORT = -fopt-info-vec-omp
 endif
 
 
